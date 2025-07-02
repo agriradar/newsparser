@@ -1,5 +1,3 @@
-// ✅ index.js (оновлений під геолокацію FRA)
-
 import express from 'express';
 import puppeteer from 'puppeteer-extra';
 import StealthPlugin from 'puppeteer-extra-plugin-stealth';
@@ -15,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 
 app.get('/', (req, res) => {
-  res.send('🟢 ON RADAR (FRA)');
+  res.send('🟢 ON RADAR (Poland)');
 });
 
 app.get('/extract', async (req, res) => {
@@ -31,7 +29,7 @@ app.get('/extract', async (req, res) => {
       args: [
         '--no-sandbox',
         '--disable-setuid-sandbox',
-        '--lang=de-DE',
+        '--lang=pl-PL',
         '--window-size=1440,900'
       ]
     });
@@ -45,13 +43,14 @@ app.get('/extract', async (req, res) => {
     );
 
     await page.setExtraHTTPHeaders({
-      'Accept-Language': 'de-DE,de;q=0.9,en;q=0.8'
+      'Accept-Language': 'pl-PL,pl;q=0.9,en;q=0.8'
     });
 
     await page.setViewport({ width: 1440, height: 900 });
-    await page.emulateTimezone('Europe/Berlin');
+    await page.emulateTimezone('Europe/Warsaw');
     await context.overridePermissions(url, ['geolocation']);
-    await page.setGeolocation({ latitude: 52.52, longitude: 13.405 });
+    await page.setGeolocation({ latitude: 52.2297, longitude: 21.0122 });
+
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 120000 });
 
     const html = await page.content();
@@ -82,5 +81,5 @@ app.get('/extract', async (req, res) => {
 });
 
 app.listen(PORT, () =>
-  console.log(`✅ Server on port ${PORT} (FRA)`)
+  console.log(`✅ Server on port ${PORT} (Poland 🇵🇱)`)
 );
