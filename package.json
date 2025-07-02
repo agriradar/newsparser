@@ -1,0 +1,23 @@
+{
+  "name": "newsparser",
+  "version": "1.0.0",
+  "description": "API для витягу статей через Puppeteer + Readability",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "install:chrome": "npx puppeteer browsers install chrome",
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.4",
+    "cors": "^2.8.5",
+    "puppeteer": "^24.10.0",
+    "puppeteer-extra": "^3.3.4",
+    "puppeteer-extra-plugin-stealth": "^2.11.1",
+    "@mozilla/readability": "^0.4.4",
+    "jsdom": "^24.0.0"
+  },
+  "engines": {
+    "node": ">=18 <25"
+  }
+}
